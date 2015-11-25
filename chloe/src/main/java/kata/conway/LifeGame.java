@@ -1,4 +1,4 @@
-package com.mycompany.kata4.lifegame;
+package kata.conway;
 
 /**
  * Created by cmahalin111813 on 24/11/2015.

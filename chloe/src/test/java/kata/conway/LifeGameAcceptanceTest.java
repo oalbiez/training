@@ -1,4 +1,4 @@
-package com.mycompany.kata4.lifegame;
+package kata.conway;
 
 import org.junit.Assert;
 import org.junit.Test;
