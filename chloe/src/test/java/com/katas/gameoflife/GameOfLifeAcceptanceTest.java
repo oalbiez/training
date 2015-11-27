@@ -1,10 +1,10 @@
-package com.sgcib.katas.gameoflife;
+package com.katas.gameoflife;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by cmahalin111813 on 24/11/2015.
+ * @author : Chloé Mahalin
  */
 public class GameOfLifeAcceptanceTest {
 
