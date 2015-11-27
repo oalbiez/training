@@ -1,4 +1,4 @@
-package com.katas.gameoflife;
+package com.sgcib.katas.gameoflife;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,13 +8,6 @@ import org.junit.Test;
  */
 public class GameOfLifeTest {
 
-    @Test
-    public void test_universe_empty() {
-        GameOfLife instanceToTest = new GameOfLife();
-        Universe result = instanceToTest.live(0, Universe.createNewUniverse(""));
-        Universe expected = Universe.createNewUniverse(0,0);
-        GameOfLifeAcceptanceTest.checkResult(expected, result);
-    }
 
     @Test
     public void test_cell_count_no_living_neighbours() {
