@@ -49,48 +49,48 @@ public class GameOfLifeTest {
     @Test
     public void test_cell_is_alive_two_neighbours() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.ALIVE, lifeGame.calculateCellState(true, 2));
+        Assert.assertEquals(CellState.ALIVE, lifeGame.calculateCellState(CellState.ALIVE, 2));
     }
 
     @Test
     public void test_cell_is_alive_three_neighbours() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.ALIVE, lifeGame.calculateCellState(true, 3));
+        Assert.assertEquals(CellState.ALIVE, lifeGame.calculateCellState(CellState.ALIVE, 3));
     }
 
     @Test
     public void test_cell_is_alive_one_neighbours() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(true, 1));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 1));
     }
 
     @Test
     public void test_cell_is_alive_more_than_three_neighbours() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(true, 4));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(true, 5));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(true, 6));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(true, 7));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(true, 8));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 4));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 5));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 6));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 7));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 8));
     }
 
     @Test
     public void test_cell_is_dead_neighbours() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(false, 0));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(false, 1));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(false, 2));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(false, 4));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(false, 5));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(false, 6));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(false, 7));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(false, 8));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 0));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 1));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 2));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 4));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 5));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 6));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 7));
+        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 8));
     }
 
     @Test
     public void test_cell_is_dead_three_neighbours() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.ALIVE, lifeGame.calculateCellState(false, 3));
+        Assert.assertEquals(CellState.ALIVE, lifeGame.calculateCellState(CellState.DEAD, 3));
     }
 
 }
