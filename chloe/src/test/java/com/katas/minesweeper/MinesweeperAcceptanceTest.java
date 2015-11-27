@@ -12,53 +12,50 @@ public class MinesweeperAcceptanceTest {
 
     @Test
     public void test_no_mine() {
-        Minesweeper game = new Minesweeper();
-        String result = game.process(Area.generate(
-                "...",
-                "...",
-                "..."
-        ));
-
         String expected =
                 "000\n" +
                 "000\n" +
                 "000";
 
-        checkResult(expected,result.toString());
+        checkResult(expected,Area.generate(
+                "...",
+                "...",
+                "..."
+        ));
     }
 
     @Test
     public void test_one_mine() {
-        Minesweeper game = new Minesweeper();
-        String result = game.process(Area.generate(
-                "*..",
-                "...",
-                "..."
-        ));
-
         String expected =
                 "*10\n" +
                 "110\n" +
                 "000";
 
-        checkResult(expected,result);
+        checkResult(expected,Area.generate(
+                "*..",
+                "...",
+                "..."
+        ));
     }
 
 
     @Test
     public void test_two_mines() {
-        Minesweeper game = new Minesweeper();
-        String result = game.process(Area.generate(
-                "*.*",
-                "...",
-                "..."
-        ));
-
         String expected =
                 "*2*\n" +
                 "121\n" +
                 "000";
 
-        checkResult(expected,result);
+        checkResult(expected,Area.generate(
+                "*.*",
+                "...",
+                "..."
+        ));
+    }
+
+    public void checkResult(String expected, Area board) {
+        Minesweeper game = new Minesweeper();
+        String result = game.process(board);
+        Assert.assertEquals(expected, result);
     }
 }
