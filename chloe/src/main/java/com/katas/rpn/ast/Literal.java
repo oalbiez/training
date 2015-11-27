@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.rpn.rpnwork.ast;
+package com.katas.rpn.ast;
 
 /**
  *
- * @author cmahalin111813
+ * @author Chloé Mahalin
  */
 public class Literal implements Node {
 
