@@ -24,7 +24,7 @@ public class Universe {
         return 0;
     }
 
-    public void changeCellState(int xCoordinate, int yCoordinate, CellState newState) {
+    public void setCellState(int xCoordinate, int yCoordinate, CellState newState) {
         this.universe[xCoordinate][yCoordinate] = newState;
     }
 
