@@ -1,7 +1,7 @@
-package com.sgcib.katas.gameoflife;
+package com.katas.gameoflife;
 
 /**
- * Created by cmahalin111813 on 24/11/2015.
+ * @author Chloé Mahalin
  */
 public class GameOfLife {
 
