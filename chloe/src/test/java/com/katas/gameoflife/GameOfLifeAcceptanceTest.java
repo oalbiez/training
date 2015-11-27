@@ -11,7 +11,7 @@ public class GameOfLifeAcceptanceTest {
    @Test
     public void test_init_case() {
         GameOfLife instanceToTest = new GameOfLife();
-        String result = instanceToTest.live(0, Universe.createUniverse(
+        String result = instanceToTest.evolve(0, Universe.createUniverse(
                 "...",
                 "...",
                 "..."));
@@ -26,7 +26,7 @@ public class GameOfLifeAcceptanceTest {
     @Test
     public void test_cell_with_no_neighbour() {
         GameOfLife instanceToTest = new GameOfLife();
-        String result = instanceToTest.live(1, Universe.createUniverse(
+        String result = instanceToTest.evolve(1, Universe.createUniverse(
                 "*..",
                 "...",
                 "..."));
@@ -41,7 +41,7 @@ public class GameOfLifeAcceptanceTest {
     @Test
     public void test_cell_with_three_neighbour() {
         GameOfLife instanceToTest = new GameOfLife();
-        String result = instanceToTest.live(1, Universe.createUniverse(
+        String result = instanceToTest.evolve(1, Universe.createUniverse(
                 "..*",
                 "..*",
                 "*.."));
