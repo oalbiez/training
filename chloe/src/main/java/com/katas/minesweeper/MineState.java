@@ -1,4 +1,4 @@
-package com.sgcib.katas.minesweeper;
+package com.katas.minesweeper;
 
 /**
 * @author Chloé Mahalin
