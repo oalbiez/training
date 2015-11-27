@@ -29,11 +29,11 @@ public class Universe {
         this.universe[xCoordinate][yCoordinate] = newState;
     }
 
-    public boolean isCellAlive(int xCoordinate, int yCoordinate) {
+    public CellState getCellState(int xCoordinate, int yCoordinate) {
         if (xCoordinate >= 0 && yCoordinate >= 0 && xCoordinate < this.getXSize() && yCoordinate < this.getYSize()) {
-            return this.universe[xCoordinate][yCoordinate] == CellState.ALIVE;
+            return this.universe[xCoordinate][yCoordinate];
         }
-        return false;
+        return CellState.DEAD;
     }
 
 
