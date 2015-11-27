@@ -54,17 +54,17 @@ public class Universe {
     }
 
     public static Universe createNewUniverse(String... universeLines) {
-        Universe constructedUniverse = new Universe(0, 0);
+        Universe toReturn = new Universe(0, 0);
         if (universeLines.length > 0 && !universeLines[0].isEmpty()) {
-            constructedUniverse = new Universe(universeLines.length, universeLines[0].length());
+            toReturn = new Universe(universeLines.length, universeLines[0].length());
 
-            for (int i = 0; i < constructedUniverse.getXSize(); i++) {
-                for (int j = 0; j < constructedUniverse.getYSize(); j++) {
-                    constructedUniverse.setCellState(i, j, CellState.getStateFromSymbol(universeLines[i].charAt(j)));
+            for (int i = 0; i < toReturn.getXSize(); i++) {
+                for (int j = 0; j < toReturn.getYSize(); j++) {
+                    toReturn.setCellState(i, j, CellState.getStateFromSymbol(universeLines[i].charAt(j)));
                 }
             }
         }
-        return constructedUniverse;
+        return toReturn;
     }
 
     public static Universe createNewUniverse(int xSize, int ySize) {
