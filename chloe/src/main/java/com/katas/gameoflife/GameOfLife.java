@@ -20,7 +20,7 @@ public class GameOfLife {
         Universe toReturn = new Universe(universe.getXSize(), universe.getYSize());
         for (int x = 0; x < universe.getXSize(); x++) {
             for (int y = 0; y < universe.getYSize(); y++) {
-                toReturn.changeCellState(x, y, calculateCellState(universe.isCellAlive(x, y), countNeighbours(x, y, universe)));
+                toReturn.setCellState(x, y, calculateCellState(universe.isCellAlive(x, y), countNeighbours(x, y, universe)));
             }
         }
         return toReturn;
