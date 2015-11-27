@@ -12,7 +12,7 @@ public class GameOfLifeTest {
     @Test
     public void test_cell_count_no_living_neighbours() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(0, lifeGame.countNeighbours(0,0,Universe.createNewUniverse(
+        Assert.assertEquals(0, lifeGame.countNeighbours(0,0,Universe.createUniverse(
                 "*..",
                 "...",
                 "...")));
@@ -21,7 +21,7 @@ public class GameOfLifeTest {
     @Test
      public void test_cell_count_two_living_neighbours() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(2, lifeGame.countNeighbours(0,0,Universe.createNewUniverse(
+        Assert.assertEquals(2, lifeGame.countNeighbours(0,0,Universe.createUniverse(
                 "**.",
                 ".*.",
                 "...")));
@@ -30,7 +30,7 @@ public class GameOfLifeTest {
     @Test
     public void test_cell_count_three_living_neighbours() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(3, lifeGame.countNeighbours(1,1,Universe.createNewUniverse(
+        Assert.assertEquals(3, lifeGame.countNeighbours(1,1,Universe.createUniverse(
                 ".*.",
                 ".**",
                 "*..")));
@@ -39,11 +39,12 @@ public class GameOfLifeTest {
     @Test
     public void test_cell_count_three_living_neighbours_edge() {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(3, lifeGame.countNeighbours(2,2,Universe.createNewUniverse(
+        Assert.assertEquals(3, lifeGame.countNeighbours(2,2,Universe.createUniverse(
                 ".*.",
                 ".**",
                 "***")));
     }
+
 
     @Test
     public void test_cell_is_alive_two_neighbours() {
