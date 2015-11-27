@@ -37,37 +37,6 @@ public class Area {
     }
 
 
-    @Override
-    public String toString() {
-        StringBuilder toReturn = new StringBuilder();
-
-        for (int x = 0; x < this.getXSize(); x++) {
-            for (int y = 0; y < this.getYSize(); y++) {
-                toReturn.append(this.board[x][y].getSymbol());
-            }
-            toReturn.append("\n");
-        }
-
-        return toReturn.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Area area = (Area) o;
-
-        return Arrays.deepEquals(board, area.board);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return board != null ? Arrays.deepHashCode(board) : 0;
-    }
-
-
     public static Area generate(String... rows) {
         Area constructedBoard = new Area(0, 0);
         if (rows.length > 0 && !rows[0].isEmpty()) {
