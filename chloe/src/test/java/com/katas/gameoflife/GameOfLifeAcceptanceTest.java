@@ -1,4 +1,4 @@
-package com.katas.gameoflife;
+package com.sgcib.katas.gameoflife;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,16 +11,14 @@ public class GameOfLifeAcceptanceTest {
     @Test
     public void test_init_case() {
         GameOfLife instanceToTest = new GameOfLife();
-        Universe result = instanceToTest.live(0, Universe.createNewUniverse(
+        String result = instanceToTest.live(0, Universe.createNewUniverse(
                 "...",
                 "...",
                 "..."));
 
-        Universe expected = Universe.createNewUniverse(
-                "...",
-                "...",
-                "..."
-        );
+        String expected = "...\n"+
+                "...\n"+
+                "...";
 
         checkResult(expected, result);
     }
@@ -28,16 +26,14 @@ public class GameOfLifeAcceptanceTest {
     @Test
     public void test_cell_with_no_neighbour() {
         GameOfLife instanceToTest = new GameOfLife();
-        Universe result = instanceToTest.live(1, Universe.createNewUniverse(
+        String result = instanceToTest.live(1, Universe.createNewUniverse(
                 "*..",
                 "...",
                 "..."));
 
-        Universe expected = Universe.createNewUniverse(
-                "...",
-                "...",
-                "..."
-        );
+        String expected = "...\n"+
+                "...\n"+
+                "...";
 
         checkResult(expected, result);
     }
@@ -45,21 +41,19 @@ public class GameOfLifeAcceptanceTest {
     @Test
     public void test_cell_with_three_neighbour() {
         GameOfLife instanceToTest = new GameOfLife();
-        Universe result = instanceToTest.live(1, Universe.createNewUniverse(
+        String result = instanceToTest.live(1, Universe.createNewUniverse(
                 "..*",
                 "..*",
                 "*.."));
 
-        Universe expected = Universe.createNewUniverse(
-                "...",
-                ".*.",
-                "..."
-        );
+        String expected = "...\n"+
+                ".*.\n"+
+                "...";
 
         checkResult(expected, result);
     }
 
-    public static void checkResult(Universe expected, Universe result) {
+    public static void checkResult(String expected, String result) {
         Assert.assertEquals(expected, result);
     }
 
