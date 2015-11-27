@@ -41,8 +41,8 @@ public class Universe {
     public String toString() {
         StringBuilder toReturn = new StringBuilder();
 
-        for (int x = 0; x < this.getXSize(); x++) {
-            for (int y = 0; y < this.getYSize(); y++) {
+        for (int x = 0; x < this.xSize; x++) {
+            for (int y = 0; y < this.ySize; y++) {
                 toReturn.append(this.universe[x][y].getSymbol());
             }
             if(x < this.getXSize() -1) {
@@ -58,15 +58,15 @@ public class Universe {
         if (universeLines.length > 0 && !universeLines[0].isEmpty()) {
             constructedUniverse = new Universe(universeLines.length, universeLines[0].length());
 
-            for (int i = 0; i < universeLines.length; i++) {
-                for (int j = 0; j < universeLines[i].length(); j++) {
-                    constructedUniverse.changeCellState(i, j, CellState.getStateFromSymbol(universeLines[i].charAt(j)));
+            for (int i = 0; i < constructedUniverse.getXSize(); i++) {
+                for (int j = 0; j < constructedUniverse.getYSize(); j++) {
+                    constructedUniverse.setCellState(i, j, CellState.getStateFromSymbol(universeLines[i].charAt(j)));
                 }
             }
         }
         return constructedUniverse;
     }
-    
+
     public static Universe createNewUniverse(int xSize, int ySize) {
         return new Universe(xSize,ySize);
     }
