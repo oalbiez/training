@@ -45,52 +45,45 @@ public class GameOfLifeTest {
                 "***")));
     }
 
-
-    @Test
-    public void test_cell_is_alive_two_neighbours() {
-        GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.ALIVE, lifeGame.calculateCellState(CellState.ALIVE, 2));
+   @Test
+    public void test_cell_is_alive_due_to_alive_before_and_enough_neighbours() {
+        checkCellStateAccordingToNumberOfNeighbours(CellState.ALIVE, CellState.ALIVE,2);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.ALIVE, CellState.ALIVE,3);
     }
 
     @Test
-    public void test_cell_is_alive_three_neighbours() {
-        GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.ALIVE, lifeGame.calculateCellState(CellState.ALIVE, 3));
+    public void test_cell_is_dead_due_to_not_enough_population() {
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.ALIVE,1);
     }
 
     @Test
-    public void test_cell_is_alive_one_neighbours() {
-        GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 1));
+    public void test_cell_is_dead_due_to_overpopulation() {
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.ALIVE,4);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.ALIVE,5);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.ALIVE,6);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.ALIVE,7);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.ALIVE,8);
     }
 
     @Test
-    public void test_cell_is_alive_more_than_three_neighbours() {
-        GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 4));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 5));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 6));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 7));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.ALIVE, 8));
+    public void test_cell_is_dead_because_dead_before_and_no_three_neighbours() {
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.DEAD,0);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.DEAD,1);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.DEAD,2);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.DEAD,4);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.DEAD,5);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.DEAD,6);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.DEAD,7);
+        checkCellStateAccordingToNumberOfNeighbours(CellState.DEAD, CellState.DEAD,8);
     }
 
     @Test
-    public void test_cell_is_dead_neighbours() {
-        GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 0));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 1));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 2));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 4));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 5));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 6));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 7));
-        Assert.assertEquals(CellState.DEAD, lifeGame.calculateCellState(CellState.DEAD, 8));
+    public void test_cell_is_alive_because_dead_before_and_three_neighbours() {
+        checkCellStateAccordingToNumberOfNeighbours(CellState.ALIVE, CellState.DEAD,3);
     }
 
-    @Test
-    public void test_cell_is_dead_three_neighbours() {
+    public void checkCellStateAccordingToNumberOfNeighbours(CellState expected, CellState actual, int numberOfNeighbours) {
         GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(CellState.ALIVE, lifeGame.calculateCellState(CellState.DEAD, 3));
+        Assert.assertEquals(expected, lifeGame.calculateCellState(actual, numberOfNeighbours));
     }
-
 }
