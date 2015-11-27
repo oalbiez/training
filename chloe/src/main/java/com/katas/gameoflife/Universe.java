@@ -77,4 +77,9 @@ public class Universe {
         }
         return constructedUniverse;
     }
+    
+    public static Universe createNewUniverse(int xSize, int ySize) {
+        return new Universe(xSize,ySize);
+    }
+}
 }
