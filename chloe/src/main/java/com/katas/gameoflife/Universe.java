@@ -8,20 +8,21 @@ import java.util.Arrays;
 public class Universe {
 
     CellState[][] universe;
+    private int xSize;
+    private int ySize;
 
-    public Universe(int xSize, int ySize) {
+    private Universe(int xSize, int ySize) {
         this.universe = new CellState[xSize][ySize];
+        this.xSize = xSize;
+        this.ySize = ySize;
     }
 
     public int getXSize() {
-        return universe.length;
+        return this.xSize;
     }
 
     public int getYSize() {
-        if (universe.length > 0) {
-            return universe[0].length;
-        }
-        return 0;
+        return this.ySize;
     }
 
     public void setCellState(int xCoordinate, int yCoordinate, CellState newState) {
