@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class Universe {
 
-    CellState[][] universe;
+    private CellState[][] universe;
     private int xSize;
     private int ySize;
 
@@ -53,7 +53,7 @@ public class Universe {
         return toReturn.toString();
     }
 
-    public static Universe createNewUniverse(String... universeLines) {
+    public static Universe createUniverse(String... universeLines) {
         Universe toReturn = new Universe(0, 0);
         if (universeLines.length > 0 && !universeLines[0].isEmpty()) {
             toReturn = new Universe(universeLines.length, universeLines[0].length());
@@ -67,7 +67,7 @@ public class Universe {
         return toReturn;
     }
 
-    public static Universe createNewUniverse(int xSize, int ySize) {
+    public static Universe createUniverse(int xSize, int ySize) {
         return new Universe(xSize,ySize);
     }
 }
