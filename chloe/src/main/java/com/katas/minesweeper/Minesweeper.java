@@ -14,7 +14,7 @@ public class Minesweeper {
                 if (board.isAMine(x, y)) {
                     result.append(MineState.MINE.getSymbol());
                 } else {
-                    result.append(this.countMine(x, y, board));
+                    result.append(this.countMineAroundCoordinate(x, y, board));
                 }
             }
             if (x != board.getXSize() - 1) {
@@ -26,7 +26,7 @@ public class Minesweeper {
     }
 
 
-    public int countMine(int xCoordinate, int yCoordinate, Area board) {
+    public int countMineAroundCoordinate(int xCoordinate, int yCoordinate, Area board) {
         int counter = 0;
         for (int dx = -1; dx <= 1; dx++) {
             for (int dy = -1; dy <= 1; dy++) {
