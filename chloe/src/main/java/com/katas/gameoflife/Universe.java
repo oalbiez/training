@@ -36,19 +36,6 @@ public class Universe {
         return false;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Universe universe1 = (Universe) o;
-        return Arrays.deepEquals(universe, universe1.universe);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return universe != null ? Arrays.deepHashCode(universe) : 0;
-    }
 
     @Override
     public String toString() {
