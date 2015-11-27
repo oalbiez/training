@@ -12,7 +12,7 @@ public class GameOfLifeTest {
     public void test_universe_empty() {
         GameOfLife instanceToTest = new GameOfLife();
         Universe result = instanceToTest.live(0, Universe.createNewUniverse(""));
-        Universe expected = new Universe(0,0);
+        Universe expected = Universe.createNewUniverse(0,0);
         GameOfLifeAcceptanceTest.checkResult(expected, result);
     }
 
