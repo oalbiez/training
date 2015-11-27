@@ -1,7 +1,7 @@
 package com.katas.gameoflife;
 
 /**
- * Created by cmahalin111813 on 26/11/2015.
+ * Created by Chloé Mahalin
  */
 public enum CellState {
     ALIVE('*'), DEAD('.');
