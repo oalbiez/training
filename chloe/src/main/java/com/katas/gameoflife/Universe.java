@@ -3,7 +3,7 @@ package com.katas.gameoflife;
 import java.util.Arrays;
 
 /**
- * Created by cmahalin111813 on 26/11/2015.
+ * Created by Chloé Mahalin
  */
 public class Universe {
 
@@ -58,7 +58,9 @@ public class Universe {
             for (int y = 0; y < this.getYSize(); y++) {
                 toReturn.append(this.universe[x][y].getSymbol());
             }
-            toReturn.append("\n");
+            if(x < this.getXSize() -1) {
+                toReturn.append("\n");
+            }
         }
 
         return toReturn.toString();
