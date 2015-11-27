@@ -8,41 +8,41 @@ import org.junit.Test;
  */
 public class GameOfLifeTest {
 
-
-    @Test
+@Test
     public void test_cell_count_no_living_neighbours() {
-        GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(0, lifeGame.countNeighbours(0,0,Universe.createUniverse(
+        checkCountNeighbours(0,0,0,Universe.createUniverse(
                 "*..",
                 "...",
-                "...")));
+                "..."));
     }
 
     @Test
      public void test_cell_count_two_living_neighbours() {
-        GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(2, lifeGame.countNeighbours(0,0,Universe.createUniverse(
+        checkCountNeighbours(2,0,0,Universe.createUniverse(
                 "**.",
                 ".*.",
-                "...")));
+                "..."));
     }
 
     @Test
     public void test_cell_count_three_living_neighbours() {
-        GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(3, lifeGame.countNeighbours(1,1,Universe.createUniverse(
+        checkCountNeighbours(3,1,1,Universe.createUniverse(
                 ".*.",
                 ".**",
-                "*..")));
+                "*.."));
     }
 
     @Test
     public void test_cell_count_three_living_neighbours_edge() {
-        GameOfLife lifeGame = new GameOfLife();
-        Assert.assertEquals(3, lifeGame.countNeighbours(2,2,Universe.createUniverse(
+        checkCountNeighbours(3,2,2,Universe.createUniverse(
                 ".*.",
                 ".**",
-                "***")));
+                "***"));
+    }
+
+    public void checkCountNeighbours(int numberOfNeighboursExpected, int xCoordinate, int yCoordinate, Universe universe) {
+        GameOfLife lifeGame = new GameOfLife();
+        Assert.assertEquals(numberOfNeighboursExpected, lifeGame.countNeighbours(xCoordinate,yCoordinate,universe));
     }
 
    @Test
