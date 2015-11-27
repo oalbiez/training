@@ -1,4 +1,4 @@
-package com.katas.gameoflife;
+package com.sgcib.katas.gameoflife;
 
 /**
  * Created by cmahalin111813 on 24/11/2015.
@@ -6,14 +6,14 @@ package com.katas.gameoflife;
 public class GameOfLife {
 
 
-    public Universe live(int numberOfSteps, Universe universe) {
+    public String live(int numberOfSteps, Universe universe) {
         if (universe != null && universe.getXSize() > 0 && universe.getYSize() > 0) {
             for (int step = 0; step < numberOfSteps; step++) {
                 universe = evolve(universe);
             }
         }
 
-        return universe;
+        return universe.toString();
     }
 
     public Universe evolve(Universe universe) {
