@@ -11,7 +11,7 @@ public class Area {
     private int xSize;
     private int ySize;
 
-    public Area(int x, int y) {
+    private Area(int x, int y) {
         board = new MineState[x][y];
         this.xSize = x;
         this.ySize = y;
