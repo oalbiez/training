@@ -17,7 +17,7 @@ public class GameOfLife {
     }
 
     public Universe evolve(Universe universe) {
-        Universe toReturn = Universe.createNewUniverse(universe.getXSize(), universe.getYSize());
+        Universe toReturn = Universe.createUniverse(universe.getXSize(), universe.getYSize());
         for (int x = 0; x < universe.getXSize(); x++) {
             for (int y = 0; y < universe.getYSize(); y++) {
                 toReturn.setCellState(x, y, calculateCellState(universe.isCellAlive(x, y), countNeighbours(x, y, universe)));
