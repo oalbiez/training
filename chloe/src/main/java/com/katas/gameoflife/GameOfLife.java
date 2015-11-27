@@ -6,7 +6,7 @@ package com.katas.gameoflife;
 public class GameOfLife {
 
 
-    public String live(int numberOfSteps, Universe universe) {
+    public String evolve(int numberOfSteps, Universe universe) {
         if (universe != null && universe.getXSize() > 0 && universe.getYSize() > 0) {
             for (int step = 0; step < numberOfSteps; step++) {
                 universe = evolve(universe);
