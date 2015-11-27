@@ -1,4 +1,4 @@
-package com.sgcib.katas.gameoflife;
+package com.katas.gameoflife;
 
 import java.util.Arrays;
 
