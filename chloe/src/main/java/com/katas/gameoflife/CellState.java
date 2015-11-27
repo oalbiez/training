@@ -1,4 +1,4 @@
-package com.sgcib.katas.gameoflife;
+package com.katas.gameoflife;
 
 /**
  * Created by cmahalin111813 on 26/11/2015.
