@@ -1,12 +1,11 @@
 package com.katas.rpn.stack.operators;
 
-import com.mycompany.kata4.rpnwork.RpnCalculatorWithRecursivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.mycompany.kata4.rpnwork.RpnCalculatorWithRecursivity.*;
+import static com.katas.rpn.stack.RpnCalculatorWithRecursivity.*;
 
 /**
  *

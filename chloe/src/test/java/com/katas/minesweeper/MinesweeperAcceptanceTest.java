@@ -1,8 +1,8 @@
 package com.katas.minesweeper;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import static com.sgcib.katas.minesweeper.MinesweeperTest.checkResult;
 
 
 /**

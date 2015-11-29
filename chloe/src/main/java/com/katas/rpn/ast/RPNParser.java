@@ -2,7 +2,7 @@ package com.katas.rpn.ast;
 
 import java.util.Stack;
 
-import static com.mycompany.rpn.rpnwork.ast.NodeFactory.*;
+import static com.katas.rpn.ast.NodeFactory.*;
 
 
 /**

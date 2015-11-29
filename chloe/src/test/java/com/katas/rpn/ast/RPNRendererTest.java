@@ -5,10 +5,9 @@
  */
 package com.katas.rpn.ast;
 
+import static com.katas.rpn.ast.NodeFactory.*;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static com.kata.rpn.ast.NodeFactory.*;
 
 /**
  *
