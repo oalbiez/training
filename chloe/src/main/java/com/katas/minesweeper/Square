@@ -1,0 +1,17 @@
+package com.katas.minesweeper.squares;
+
+/**
+ * @author : Chloé Mahalin
+ */
+public class Square {
+
+    private MineState state;
+
+    public MineState getState() {
+        return state;
+    }
+
+    public void setState(MineState state) {
+        this.state = state;
+    }
+}
