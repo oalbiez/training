@@ -4,11 +4,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-
 /**
  * @author Chloé Mahalin
  */
-public class MinesweeperAcceptanceTest {
+public class MatrixMinesweeperAcceptanceTest {
+
+    /**=====================================TESTS====================================**/
 
     @Test
     public void test_no_mine() {
@@ -17,7 +18,7 @@ public class MinesweeperAcceptanceTest {
                 "000\n" +
                 "000";
 
-        checkResult(expected,Area.generate(
+        checkResult(expected, AreaFactory.createNewArea("square",
                 "...",
                 "...",
                 "..."
@@ -31,7 +32,7 @@ public class MinesweeperAcceptanceTest {
                 "110\n" +
                 "000";
 
-        checkResult(expected,Area.generate(
+        checkResult(expected, AreaFactory.createNewArea("square",
                 "*..",
                 "...",
                 "..."
@@ -46,14 +47,30 @@ public class MinesweeperAcceptanceTest {
                 "121\n" +
                 "000";
 
-        checkResult(expected,Area.generate(
+        checkResult(expected, AreaFactory.createNewArea("square",
                 "*.*",
                 "...",
                 "..."
         ));
     }
 
-    public void checkResult(String expected, Area board) {
+    @Test
+    public void test_three_mines() {
+        String expected =
+                "*3*\n" +
+                "2*2\n" +
+                "111";
+
+        checkResult(expected, AreaFactory.createNewArea("square",
+                "*.*",
+                ".*.",
+                "..."
+        ));
+    }
+
+    /**=====================================METHODES====================================**/
+
+    public void checkResult(String expected, IArea board) {
         Minesweeper game = new Minesweeper();
         String result = game.process(board);
         Assert.assertEquals(expected, result);
