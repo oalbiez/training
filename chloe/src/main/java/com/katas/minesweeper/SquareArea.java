@@ -1,8 +1,5 @@
 package com.katas.minesweeper;
 
-import com.sgcib.katas.minesweeper.MineState;
-import com.sgcib.katas.minesweeper.squares.Square;
-
 /**
  * @author Chloé Mahalin
  */
