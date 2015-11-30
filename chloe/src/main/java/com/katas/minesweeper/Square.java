@@ -2,6 +2,7 @@ package com.katas.minesweeper.squares;
 
 /**
  * @author : Chloé Mahalin
+ * L'encapsulation permet d'anticiper l'évolution.
  */
 public class Square {
 
