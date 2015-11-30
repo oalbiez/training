@@ -6,9 +6,9 @@ package com.katas.minesweeper;
 public enum MineState {
     MINE('*'), NO_MINE('.');
 
-    private char symbol;
+    private final char symbol;
 
-    private MineState(char symbol) {
+    MineState(char symbol) {
         this.symbol = symbol;
     }
 
@@ -17,10 +17,7 @@ public enum MineState {
     }
 
     public static MineState getStateFromSymbol(char symbol) {
-        if (symbol == '*') {
-            return MINE;
-        } else {
-            return NO_MINE;
-        }
+        return (symbol == '*') ? MINE : NO_MINE;
+
     }
 }
