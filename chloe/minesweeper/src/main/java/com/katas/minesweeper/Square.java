@@ -1,4 +1,4 @@
-package com.katas.minesweeper.squares;
+package com.katas.minesweeper;
 
 /**
  * @author : Chloé Mahalin

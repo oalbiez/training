@@ -3,20 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0   http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>chloe</groupId>
-    <artifactId>kata</artifactId>
+    <artifactId>minesweeper</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
-    <name>Katas</name>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <modules>
-        <module>gameoflife</module>
-        <module>minesweeper</module>
-        <module>rpn</module>
-    </modules>
 
     <dependencies>
         <dependency>
