@@ -9,13 +9,13 @@ public class Foobarqix {
     public static String convert(int input) {
         StringBuilder toReturn = new StringBuilder();
 
-        if (input % 3 == 0) {
+        if (isAMultipleOfThree(input)) {
             toReturn.append("Foo");
         }
-        if (input % 5 == 0) {
+        if (isAMultipleOfFive(input)) {
             toReturn.append("Bar");
         }
-        if (input % 7 == 0) {
+        if (isAMultipleOfSeven(input)) {
             toReturn.append("Qix");
         }
 
@@ -34,9 +34,7 @@ public class Foobarqix {
                     toReturn.append("*");
                     break;
                 default:
-                    if (!toReturn.toString().contains("Foo")
-                        && !toReturn.toString().contains("Bar")
-                        && !toReturn.toString().contains("Qix")) {
+                    if (!isAMultipleOfThreeOrFiveOrSeven(input)) {
                         toReturn.append(caracter);
                     }
                     break;
@@ -44,6 +42,28 @@ public class Foobarqix {
         }
 
         return toReturn.toString();
+    }
+
+
+    private static boolean isAMultipleOfThree(int value) {
+        return value % 3 == 0;
+    }
+
+
+    private static boolean isAMultipleOfFive(int value) {
+        return value % 5 == 0;
+    }
+
+
+    private static boolean isAMultipleOfSeven(int value) {
+        return value % 7 == 0;
+    }
+
+
+    private static boolean isAMultipleOfThreeOrFiveOrSeven(int value) {
+        return isAMultipleOfThree(value)
+               || isAMultipleOfFive(value)
+               || isAMultipleOfSeven(value);
     }
 
 }
