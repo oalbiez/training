@@ -17,7 +17,7 @@ public class Rental {
 
 
     public double getRentalPrice() {
-        switch (this.getMovie().getPriceCode()) {
+        switch (this.getMovie().getCategory()) {
             case REGULAR:
                 return 2 + Math.max(0, (this.daysRented - 2) * 1.5);
             case NEW_RELEASE:
@@ -27,6 +27,21 @@ public class Rental {
             default:
                 return 0;
         }
+    }
+
+
+    public int getFidelityPoints() {
+        return this.hasBonusPoints() ? 2 : 1;
+    }
+
+
+    private boolean hasBonusPoints() {
+        return this.movie.isANewRelease() && this.isMoreThanOneDay();
+    }
+
+
+    private boolean isMoreThanOneDay() {
+        return this.daysRented > 1;
     }
 
 

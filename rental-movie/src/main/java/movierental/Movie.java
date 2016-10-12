@@ -3,29 +3,31 @@ package movierental;
 public class Movie {
 
     public enum Category {
-        REGULAR, //0
-        CHILDREN, //2
-        NEW_RELEASE; //1
+        REGULAR, CHILDREN, NEW_RELEASE;
     }
 
     private String title;
 
-    private Category priceCode;
+    private Category category;
 
 
     public Movie(String title, Category priceCode) {
         this.title = title;
-        this.priceCode = priceCode;
+        this.category = priceCode;
+    }
+
+    public boolean isANewRelease() {
+        return this.category == Category.NEW_RELEASE;
     }
 
 
-    public Category getPriceCode() {
-        return this.priceCode;
+    public Category getCategory() {
+        return this.category;
     }
 
 
-    public void setPriceCode(Category arg) {
-        this.priceCode = arg;
+    public void setCategory(Category arg) {
+        this.category = arg;
     }
 
 
