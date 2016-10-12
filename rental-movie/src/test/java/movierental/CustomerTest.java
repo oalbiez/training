@@ -36,6 +36,7 @@ public class CustomerTest {
         Assert.assertEquals("Rental Record for toto\nAmount owed is 0.0\nYou earned 0 frequent renter points", customer.statement());
     }
 
+
     @Test
     public void test_statement_customer_with_one_rental_one_movie_no_days() {
         Customer customer = new Customer("toto");
@@ -46,6 +47,7 @@ public class CustomerTest {
 
         Assert.assertEquals("Rental Record for toto\n\tnull\t2.0\nAmount owed is 2.0\nYou earned 1 frequent renter points", customer.statement());
     }
+
 
     @Test
     public void test_statement_customer_with_one_rental_one_movie_price_code_0_one_days() {
@@ -58,6 +60,7 @@ public class CustomerTest {
         Assert.assertEquals("Rental Record for toto\n\tnull\t2.0\nAmount owed is 2.0\nYou earned 1 frequent renter points", customer.statement());
     }
 
+
     @Test
     public void test_statement_customer_with_one_rental_one_movie_price_code_0_two_days() {
         Customer customer = new Customer("toto");
@@ -69,8 +72,9 @@ public class CustomerTest {
         Assert.assertEquals("Rental Record for toto\n\tnull\t2.0\nAmount owed is 2.0\nYou earned 1 frequent renter points", customer.statement());
     }
 
+
     @Test
-    public void test_statement_customer_with_one_rental_one_movie_price_code_0_three_days(){
+    public void test_statement_customer_with_one_rental_one_movie_price_code_0_three_days() {
         Customer customer = new Customer("toto");
 
         Movie movie = new Movie(null, Category.REGULAR);
@@ -79,6 +83,7 @@ public class CustomerTest {
 
         Assert.assertEquals("Rental Record for toto\n\tnull\t2.0\nAmount owed is 2.0\nYou earned 1 frequent renter points", customer.statement());
     }
+
 
     @Test
     public void test_statement_customer_with_one_rental_one_movie_price_code_1_one_days() {
@@ -115,7 +120,8 @@ public class CustomerTest {
         Assert.assertEquals("Rental Record for toto\n\tnull\t6.0\nAmount owed is 6.0\nYou earned 2 frequent renter points", customer.statement());
     }
 
-           @Test
+
+    @Test
     public void test_statement_customer_with_one_rental_one_movie_price_code_2_one_days() {
         Customer customer = new Customer("toto");
 
@@ -125,6 +131,7 @@ public class CustomerTest {
 
         Assert.assertEquals("Rental Record for toto\n\tnull\t1.5\nAmount owed is 1.5\nYou earned 1 frequent renter points", customer.statement());
     }
+
 
     @Test
     public void test_statement_customer_with_one_rental_one_movie_price_code_2_two_days() {
@@ -137,8 +144,9 @@ public class CustomerTest {
         Assert.assertEquals("Rental Record for toto\n\tnull\t1.5\nAmount owed is 1.5\nYou earned 1 frequent renter points", customer.statement());
     }
 
+
     @Test
-    public void test_statement_customer_with_one_rental_one_movie_price_code_2_three_days(){
+    public void test_statement_customer_with_one_rental_one_movie_price_code_2_three_days() {
         Customer customer = new Customer("toto");
 
         Movie movie = new Movie(null, Category.CHILDREN);
@@ -146,5 +154,25 @@ public class CustomerTest {
         customer.addRental(rental);
 
         Assert.assertEquals("Rental Record for toto\n\tnull\t1.5\nAmount owed is 1.5\nYou earned 1 frequent renter points", customer.statement());
+    }
+
+
+    @Test
+    public void test_statement_customer_with_three_rentals() {
+        Customer customer = new Customer("toto");
+
+        Movie movie = new Movie("zorro", Category.CHILDREN);
+        Rental rental = new Rental(movie, 2);
+        customer.addRental(rental);
+
+        Movie movie2 = new Movie("bambi", Category.NEW_RELEASE);
+        Rental rental2 = new Rental(movie2, 1);
+        customer.addRental(rental2);
+
+        Movie movie3 = new Movie("ouioui", Category.REGULAR);
+        Rental rental3 = new Rental(movie3, 3);
+        customer.addRental(rental3);
+
+        Assert.assertEquals("Rental Record for toto\n\tzorro\t1.5\n\tbambi\t3.0\n\touioui\t3.5\nAmount owed is 8.0\nYou earned 3 frequent renter points", customer.statement());
     }
 }
