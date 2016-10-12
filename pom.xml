@@ -18,6 +18,7 @@
         <module>gameoflife</module>
         <module>minesweeper</module>
         <module>rpn</module>
+        <module>rental-movie</module>
         <module>tictactoetomek</module>
     </modules>
 

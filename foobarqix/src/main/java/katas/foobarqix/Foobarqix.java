@@ -30,12 +30,20 @@ public class Foobarqix {
                 case '7':
                     toReturn.append("Qix");
                     break;
+                case '0':
+                    toReturn.append("*");
+                    break;
                 default:
+                    if (!toReturn.toString().contains("Foo")
+                        && !toReturn.toString().contains("Bar")
+                        && !toReturn.toString().contains("Qix")) {
+                        toReturn.append(caracter);
+                    }
                     break;
             }
         }
 
-        return toReturn.toString().isEmpty() ? Integer.toString(input) : toReturn.toString();
+        return toReturn.toString();
     }
 
 }
