@@ -8,24 +8,35 @@ public class TicketPrinter implements Printer {
 
     @Override
     public String print(Customer customer) {
+        StringBuilder result = new StringBuilder();
+
         double totalAmount = 0;
         int frequentRenterPoints = 0;
-        StringBuilder result = new StringBuilder();
-        result.append("Rental Record for ").append(customer.getName()).append('\n');
+        result.append("Rental Record for ")
+            .append(customer.getName())
+            .append('\n');
 
-        for (Rental each : customer.getRentals()) {
-            double thisAmount = each.getRentalPrice();
+        for (Rental currentRental : customer.getRentals()) {
+            double movieAmount = currentRental.getRentalPrice();
 
-            frequentRenterPoints += each.getFidelityPoints();
+            frequentRenterPoints += currentRental.getFidelityPoints();
 
             // show figures for this rental
-            result.append('\t').append(each.getMovie().getTitle()).append('\t').append(String.valueOf(thisAmount)).append('\n');
-            totalAmount += thisAmount;
+            result.append('\t')
+                .append(currentRental.getMovie().getTitle())
+                .append('\t')
+                .append(String.valueOf(movieAmount))
+                .append('\n');
+            totalAmount += movieAmount;
         }
 
         // add footer lines
-        result.append("Amount owed is ").append(String.valueOf(totalAmount)).append('\n');
-        result.append("You earned ").append(String.valueOf(frequentRenterPoints)).append(" frequent renter points");
+        result.append("Amount owed is ")
+            .append(String.valueOf(totalAmount))
+            .append('\n');
+        result.append("You earned ")
+            .append(String.valueOf(frequentRenterPoints))
+            .append(" frequent renter points");
 
         return result.toString();
     }

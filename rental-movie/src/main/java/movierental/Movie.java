@@ -16,6 +16,7 @@ public class Movie {
         this.category = priceCode;
     }
 
+
     public boolean isANewRelease() {
         return this.category == Category.NEW_RELEASE;
     }
