@@ -1,5 +1,6 @@
 package movierental;
 
+import movierental.Movie.Category;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,7 +40,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_no_days() {
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 0);
+        Movie movie = new Movie(null, Category.REGULAR);
         Rental rental = new Rental(movie, 0);
         customer.addRental(rental);
 
@@ -50,7 +51,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_price_code_0_one_days() {
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 0);
+        Movie movie = new Movie(null, Category.REGULAR);
         Rental rental = new Rental(movie, 1);
         customer.addRental(rental);
 
@@ -61,7 +62,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_price_code_0_two_days() {
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 0);
+        Movie movie = new Movie(null, Category.REGULAR);
         Rental rental = new Rental(movie, 2);
         customer.addRental(rental);
 
@@ -72,7 +73,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_price_code_0_three_days(){
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 0);
+        Movie movie = new Movie(null, Category.REGULAR);
         Rental rental = new Rental(movie, 2);
         customer.addRental(rental);
 
@@ -83,7 +84,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_price_code_1_one_days() {
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 1);
+        Movie movie = new Movie(null, Category.NEW_RELEASE);
         Rental rental = new Rental(movie, 1);
         customer.addRental(rental);
 
@@ -95,7 +96,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_price_code_1_two_days() {
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 1);
+        Movie movie = new Movie(null, Category.NEW_RELEASE);
         Rental rental = new Rental(movie, 2);
         customer.addRental(rental);
 
@@ -107,7 +108,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_price_code_1_three_days() {
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 1);
+        Movie movie = new Movie(null, Category.NEW_RELEASE);
         Rental rental = new Rental(movie, 2);
         customer.addRental(rental);
 
@@ -118,7 +119,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_price_code_2_one_days() {
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 2);
+        Movie movie = new Movie(null, Category.CHILDREN);
         Rental rental = new Rental(movie, 1);
         customer.addRental(rental);
 
@@ -129,7 +130,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_price_code_2_two_days() {
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 2);
+        Movie movie = new Movie(null, Category.CHILDREN);
         Rental rental = new Rental(movie, 2);
         customer.addRental(rental);
 
@@ -140,7 +141,7 @@ public class CustomerTest {
     public void test_statement_customer_with_one_rental_one_movie_price_code_2_three_days(){
         Customer customer = new Customer("toto");
 
-        Movie movie = new Movie(null, 2);
+        Movie movie = new Movie(null, Category.CHILDREN);
         Rental rental = new Rental(movie, 2);
         customer.addRental(rental);
 
