@@ -16,6 +16,20 @@ public class Rental {
     }
 
 
+    public double getRentalPrice() {
+        switch (this.getMovie().getPriceCode()) {
+            case REGULAR:
+                return 2 + Math.max(0, (this.daysRented - 2) * 1.5);
+            case NEW_RELEASE:
+                return this.daysRented * 3;
+            case CHILDREN:
+                return 1.5 + Math.max(0, (this.daysRented - 3) * 1.5);
+            default:
+                return 0;
+        }
+    }
+
+
     public int getDaysRented() {
         return this.daysRented;
     }
