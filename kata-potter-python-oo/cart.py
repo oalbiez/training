@@ -1,4 +1,5 @@
 from collections import namedtuple
+from itertools import chain
 from utils import group_by, unseen
 
 
@@ -6,8 +7,8 @@ class CartItem(namedtuple('CartItem', 'label quantity')):
     @staticmethod
     def normalize(items):
         cache = group_by(items, keyfunc=lambda i: i.label)
-        return tuple(CartItem(label=label, quantity=sum((item.quantity for item in cache[label])))
-                     for label in unseen((item.label for item in items)))
+        return tuple(CartItem(label=label, quantity=sum(item.quantity for item in cache[label]))
+                     for label in unseen(item.label for item in items))
 
 
 class Cart(namedtuple('Cart', 'items')):
@@ -21,4 +22,4 @@ class Cart(namedtuple('Cart', 'items')):
 
     @staticmethod
     def concat(*carts):
-        return Cart.create(*[item for cart in carts for item in cart.items])
+        return Cart.create(*chain.from_iterable(cart.items for cart in carts))

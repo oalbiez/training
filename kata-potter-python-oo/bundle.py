@@ -10,16 +10,18 @@ class Bundle(namedtuple('Bundle', 'size')):
 
 def bundle_series_of(labels):
     def consume_all(quantity_by_label):
-        for label in list(quantity_by_label.keys()):
+        labels = list(quantity_by_label.keys())
+        for label in labels:
             quantity_by_label[label] -= 1
             if quantity_by_label[label] == 0:
                 del quantity_by_label[label]
+        return len(labels)
 
     def process(cart):
-        quantity_by_label = dict([(item.label, item.quantity) for item in cart.items if item.label in labels])
+        quantity_by_label = dict((item.label, item.quantity) for item in cart.items if item.label in labels)
         while quantity_by_label:
-            yield Bundle(size=len(quantity_by_label.keys()))
-            consume_all(quantity_by_label)
+            yield Bundle(size=consume_all(quantity_by_label))
+
     return process
 
 
@@ -44,4 +46,4 @@ def price_bundle(bundle):
 
 
 def price_bundles(bundles):
-    return sum([price_bundle(bundle) for bundle in bundles], Price(0))
+    return sum((price_bundle(bundle) for bundle in bundles), Price(0))
