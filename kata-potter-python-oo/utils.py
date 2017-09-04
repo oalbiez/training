@@ -15,3 +15,9 @@ def unseen(items):
         if item not in seen:
             seen_add(item)
             yield item
+
+
+def sequence(item, operations):
+    for functor in operations:
+        item = functor(item)
+    return item

@@ -1,8 +1,8 @@
-# import random
+import random
 from bundle import bundle_series_of
-from helper_cart import cart, item  # , any_label
+from helper_cart import cart, item, any_label
 from potter import pricer
-from price import Price  # , PercentDiscount
+from price import Price, PercentDiscount
 
 
 def test_one_book():
@@ -17,6 +17,9 @@ def test_two_differents_books():
 
 def test_two_sames_books():
     assert price_for(item(label='A', quantity=2)) == Price((8 + 8))
+    assert price_for(
+        item(label='A', quantity=1),
+        item(label='A', quantity=1)) == Price(8 + 8)
 
 
 def test_three_differents_books():
@@ -52,13 +55,14 @@ def test_special_case():
         item(label='E', quantity=1)) == Price(51.2)
 
 
-# def test_random():
-#     items = [item(label=any_label(1, 2), quantity=1) for _ in range(random.randint(10, 400))]
-#     max_cart_price = Price(8) * len(items)
-#     min_cart_price = max_cart_price.discount(PercentDiscount.percent(25))
-#     card_price = price_for(*items)
-#     print(min_cart_price, card_price, max_cart_price)
-#     assert min_cart_price <= card_price <= max_cart_price
+def test_random():
+    items = [item(label=any_label(1, 1, chars="ABCDE"), quantity=1) for _ in range(random.randint(10, 400))]
+    max_cart_price = Price(8) * len(items)
+    min_cart_price = max_cart_price.discount(PercentDiscount.percent(25))
+    card_price = price_for(*items)
+    print(items)
+    print(min_cart_price, card_price, max_cart_price)
+    assert min_cart_price <= card_price <= max_cart_price
 
 
 def price_for(*items):

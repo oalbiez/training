@@ -3,8 +3,9 @@ import string
 from cart import Cart, CartItem
 
 
-def any_label(min_lenght=3, max_lenght=20):
-    return ''.join(random.sample(string.ascii_letters + string.digits, random.randint(min_lenght, max_lenght)))
+def any_label(min_lenght=3, max_lenght=20, chars=None):
+    chars = chars or string.ascii_letters + string.digits
+    return ''.join(random.sample(chars, random.randint(min_lenght, max_lenght)))
 
 
 def any_quantity(min_quantity=1, max_quantity=100):
