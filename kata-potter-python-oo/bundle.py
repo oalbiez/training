@@ -8,19 +8,19 @@ class Bundle(namedtuple('Bundle', 'size')):
     pass
 
 
-def bundle_series_of(labels):
-    def consume_all(quantity_by_label):
-        labels = list(quantity_by_label.keys())
-        for label in labels:
-            quantity_by_label[label] -= 1
-            if quantity_by_label[label] == 0:
-                del quantity_by_label[label]
-        return len(labels)
+def bundle_series_of(references):
+    def consume_all(quantity_by_reference):
+        references = list(quantity_by_reference.keys())
+        for reference in references:
+            quantity_by_reference[reference] -= 1
+            if quantity_by_reference[reference] == 0:
+                del quantity_by_reference[reference]
+        return len(references)
 
     def process(cart):
-        quantity_by_label = dict((item.label, item.quantity) for item in cart.items if item.label in labels)
-        while quantity_by_label:
-            yield Bundle(size=consume_all(quantity_by_label))
+        quantity_by_reference = dict((item.reference, item.quantity) for item in cart.items if item.reference in references)
+        while quantity_by_reference:
+            yield Bundle(size=consume_all(quantity_by_reference))
 
     return process
 

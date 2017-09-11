@@ -4,13 +4,13 @@ from price import Price
 
 
 def test_bundle_serie_of_with_empty_cart():
-    bundler = bundle_series_of(labels=['A', 'B'])
+    bundler = bundle_series_of(references=['A', 'B'])
     assert list(bundler(cart())) == []
 
 
 def test_bundle_serie_of_should_build_max_bundles():
-    bundler = bundle_series_of(labels=['A', 'B'])
-    result_bundles = list(bundler(cart(item(label='A', quantity=3), item(label='B', quantity=2))))
+    bundler = bundle_series_of(references=['A', 'B'])
+    result_bundles = list(bundler(cart(item(reference='A', quantity=3), item(reference='B', quantity=2))))
     assert result_bundles == [Bundle(size=2)] * 2 + [Bundle(size=1)]
 
 

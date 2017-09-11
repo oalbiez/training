@@ -22,15 +22,15 @@ def test_associativity():
 
 def test_concat_two_carts_with_two_differents_items():
     result_cart = Cart.concat(
-        cart(item(label='x', quantity=1)),
-        cart(item(label='y', quantity=1)))
+        cart(item(reference='x', quantity=1)),
+        cart(item(reference='y', quantity=1)))
     assert Cart.create(
-        item(label='x', quantity=1),
-        item(label='y', quantity=1)) == result_cart
+        item(reference='x', quantity=1),
+        item(reference='y', quantity=1)) == result_cart
 
 
 def test_concat_two_carts_with_same_items():
     result_cart = Cart.concat(
-        cart(item(label='x', quantity=3)),
-        cart(item(label='x', quantity=2)))
-    assert Cart.create(item(label='x', quantity=5)) == result_cart
+        cart(item(reference='x', quantity=3)),
+        cart(item(reference='x', quantity=2)))
+    assert Cart.create(item(reference='x', quantity=5)) == result_cart

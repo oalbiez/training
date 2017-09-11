@@ -3,12 +3,12 @@ from itertools import chain
 from utils import group_by, unseen
 
 
-class CartItem(namedtuple('CartItem', 'label quantity')):
+class CartItem(namedtuple('CartItem', 'reference quantity')):
     @staticmethod
     def normalize(items):
-        cache = group_by(items, keyfunc=lambda i: i.label)
-        return tuple(CartItem(label=label, quantity=sum(item.quantity for item in cache[label]))
-                     for label in unseen(item.label for item in items))
+        cache = group_by(items, keyfunc=lambda i: i.reference)
+        return tuple(CartItem(reference=reference, quantity=sum(item.quantity for item in cache[reference]))
+                     for reference in unseen(item.reference for item in items))
 
 
 class Cart(namedtuple('Cart', 'items')):
