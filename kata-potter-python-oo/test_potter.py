@@ -59,10 +59,7 @@ def test_random():
     items = [item(label=any_label(1, 1, chars="ABCDE"), quantity=1) for _ in range(random.randint(10, 400))]
     max_cart_price = Price(8) * len(items)
     min_cart_price = max_cart_price.discount(PercentDiscount.percent(25))
-    card_price = price_for(*items)
-    print(items)
-    print(min_cart_price, card_price, max_cart_price)
-    assert min_cart_price <= card_price <= max_cart_price
+    assert min_cart_price <= price_for(*items) <= max_cart_price
 
 
 def price_for(*items):
