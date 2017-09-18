@@ -1,5 +1,29 @@
+import re
 import urllib.request
 from bs4 import BeautifulSoup
+
+
+
+RateDefinition = re.compile("^\s*(?P<rate_from>([0-9]*[.])?[0-9]+)\s*(?P<currency_from>[A-Z]{3,4})\s*=\s*(?P<rate_to>([0-9]*[.])?[0-9]+)\s*(?P<currency_to>[A-Z]{3,4})$")
+
+
+def fixed_exchange_rates(*definitions):
+    rates = {}
+
+    def key(currency_from, currency_to):
+        return currency_from + "-" + currency_to
+
+    def parse(definition):
+        match = RateDefinition.match(definition)
+        if match:
+            rates[key(match.group('currency_from'), match.group('currency_to'))] = float(match.group('rate_to')) / float(match.group('rate_from'))
+
+    for definition in definitions:
+        parse(definition)
+
+    def rate(currency_from, currency_to):
+        return rates[key(currency_from.code, currency_to.code)]
+    return rate
 
 
 def yahoo_exchange_rates():
@@ -15,6 +39,7 @@ def yahoo_exchange_rates():
         req = urllib.request.Request(url=url.format(source=currency_from.code, destination=currency_to.code))
         with urllib.request.urlopen(req) as f:
             return parse_result(extract_result(f.read()))
+
     return process
 
 
@@ -31,4 +56,24 @@ def google_exchange_rates():
         req = urllib.request.Request(url=url.format(source=currency_from.code, destination=currency_to.code))
         with urllib.request.urlopen(req) as f:
             return parse_result(extract_result(f.read()))
+
+    return process
+
+
+def cache(inner, duration, time_provider):
+    cached_requests = {}
+
+    def key(currency_from, currency_to):
+        return currency_from.code + "-" + currency_to.code
+
+    def process(currency_from, currency_to):
+        request_key = key(currency_from, currency_to)
+        if request_key in cached_requests:
+            timestamp, rate = cached_requests[request_key]
+            if timestamp + duration > time_provider():
+                return rate
+        rate = inner(currency_from, currency_to)
+        cached_requests[request_key] = (time_provider(), rate)
+        return rate
+
     return process

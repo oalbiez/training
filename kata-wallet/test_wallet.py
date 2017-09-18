@@ -1,6 +1,6 @@
 from wallet import Wallet
 from currency import USD, EUR
-from helper_rates import exchange_rates
+from exchange_rates import fixed_exchange_rates
 
 
 def amount_in_euro(wallet, exchange_rates=None):
@@ -16,4 +16,4 @@ def test_empty_wallet_should_sum_items_with_same_currency():
 
 
 def test_empty_wallet_should_change_item_to_required_currency():
-    assert amount_in_euro(Wallet(USD(10)), exchange_rates("1 USD = 1.1 EUR")) == EUR(11)
+    assert amount_in_euro(Wallet(USD(10)), fixed_exchange_rates("1 USD = 1.1 EUR")) == EUR(11)
