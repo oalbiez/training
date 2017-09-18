@@ -1,5 +1,13 @@
 
 
+def eur(amount):
+    return Money(amount, 'EUR')
+
+
+def usd(amount):
+    return Money(amount, 'USD')
+
+
 class Money(object):
 
     @property
