@@ -13,18 +13,19 @@ RateDefinition = re.compile("""^
 
 
 def fixed_exchange_rates(*definitions):
-    rates = {}
 
     def key(currency_from, currency_to):
         return currency_from + "-" + currency_to
 
     def parse(definition):
         match = RateDefinition.match(definition)
-        if match:
-            rates[key(match.group('currency_from'), match.group('currency_to'))] = float(match.group('rate_to')) / float(match.group('rate_from'))
+        if not match:
+            raise RuntimeError("Cannot parse definition: " + definition)
+        return (
+            key(match.group('currency_from'), match.group('currency_to')),
+            float(match.group('rate_to')) / float(match.group('rate_from')))
 
-    for definition in definitions:
-        parse(definition)
+    rates = dict(parse(definition) for definition in definitions)
 
     def rate(currency_from, currency_to):
         return rates[key(currency_from.code, currency_to.code)]
