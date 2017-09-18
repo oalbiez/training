@@ -14,7 +14,9 @@ class Currency(namedtuple('Currency', 'code precision')):
         return Amount(self.round_amount(amount), self)
 
 
+DZD = Currency("DZD", 2)
 EUR = Currency("EUR", 2)
+KRW = Currency("KRW", 2)
 USD = Currency("USD", 3)
 XBT = Currency("XBT", 8)
 
