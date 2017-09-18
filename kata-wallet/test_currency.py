@@ -2,7 +2,7 @@ import random
 import pytest
 
 from helper_rates import exchange_rates
-from money import EUR, USD
+from currency import EUR, USD
 
 
 def any_amount():

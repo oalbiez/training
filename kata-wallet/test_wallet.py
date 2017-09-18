@@ -1,5 +1,5 @@
 from wallet import Wallet
-from money import USD, EUR
+from currency import USD, EUR
 from helper_rates import exchange_rates
 
 
