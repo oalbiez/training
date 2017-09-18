@@ -1,39 +1,44 @@
 import random
 import pytest
 
-from money import Money
+from helper_rates import exchange_rates
+from money import EUR, USD
 
 
 def any_amount():
     return random.randint(1, 10000)
 
 
-def eur(amount):
-    return Money(amount, 'EUR')
+def test_EUR_should_have_precision_on_two_digits():
+    assert EUR.round_amount(1.234) == 1.23
 
 
-def usd(amount):
-    return Money(amount, 'USD')
+def test_USD_should_have_precision_on_three_digits():
+    assert USD.round_amount(1.2347) == 1.235
 
 
 def test_money_should_be_addable_when_same_currency():
-    assert eur(2) + eur(3) == eur(5)
+    assert EUR(2) + EUR(3) == EUR(5)
 
 
 def test_money_should_have_a_neutral_element_for_add():
-    element = eur(any_amount())
-    neutral = eur(0)
+    element = EUR(any_amount())
+    neutral = EUR(0)
     assert neutral + element == element + neutral == element
 
 
 def test_money_should_be_assosiative_for_add():
-    x = eur(any_amount())
-    y = eur(any_amount())
-    z = eur(any_amount())
+    x = EUR(any_amount())
+    y = EUR(any_amount())
+    z = EUR(any_amount())
     assert (x + y) + z == x + (y + z) == x + y + z
 
 
 def test_money_should_raise_error_when_currency_mismatch():
     with pytest.raises(TypeError) as exception:
-        _ = eur(any_amount()) + usd(any_amount())
+        _ = EUR(any_amount()) + USD(any_amount())
     assert str(exception.value) == 'Mismatch currency, expected EUR got USD'
+
+
+def test_money_should_be_changed_with_an_exchange_rate():
+    assert EUR(10).change(USD, exchange_rates("1 EUR = 1.19 USD")) == USD(11.9)
