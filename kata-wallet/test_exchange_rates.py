@@ -3,7 +3,6 @@ from wallet import Wallet
 from currency import USD, EUR, DZD, KRW
 
 
-
 def test_yahoo_exchange_rates_should_be_not_null():
     assert yahoo_exchange_rates()(EUR, USD) > 0
 

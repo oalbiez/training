@@ -4,8 +4,12 @@ import urllib.request
 from bs4 import BeautifulSoup
 
 
-
-RateDefinition = re.compile("^\s*(?P<rate_from>([0-9]*[.])?[0-9]+)\s*(?P<currency_from>[A-Z]{3,4})\s*=\s*(?P<rate_to>([0-9]*[.])?[0-9]+)\s*(?P<currency_to>[A-Z]{3,4})$")
+RateDefinition = re.compile("""^
+                               \s*(?P<rate_from>([0-9]*[.])?[0-9]+)
+                               \s*(?P<currency_from>[A-Z]{3,4})
+                               \s*=
+                               \s*(?P<rate_to>([0-9]*[.])?[0-9]+)
+                               \s*(?P<currency_to>[A-Z]{3,4})$""", re.VERBOSE)
 
 
 def fixed_exchange_rates(*definitions):
