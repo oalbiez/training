@@ -1,4 +1,5 @@
 import re
+import time
 import urllib.request
 from bs4 import BeautifulSoup
 
@@ -60,7 +61,7 @@ def google_exchange_rates():
     return process
 
 
-def cache(inner, duration, time_provider):
+def cached_exchange_rates(inner, duration, time_provider=time.time):
     cached_requests = {}
 
     def key(currency_from, currency_to):
