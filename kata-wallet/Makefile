@@ -5,4 +5,4 @@ test:
 
 lint:
 	pycodestyle .
-	pylint *.py
+	pylint3 *.py

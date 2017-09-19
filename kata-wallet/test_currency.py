@@ -9,11 +9,11 @@ def any_amount():
     return random.randint(1, 10000)
 
 
-def test_EUR_should_have_precision_on_two_digits():
+def test_eur_should_have_2_digit_precision():
     assert EUR.round_amount(1.234) == 1.23
 
 
-def test_USD_should_have_precision_on_three_digits():
+def test_usd_should_have_3_digit_precision():
     assert USD.round_amount(1.2347) == 1.235
 
 

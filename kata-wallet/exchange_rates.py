@@ -1,10 +1,11 @@
 import re
 import time
-import urllib.request
+from urllib.parse import quote
+from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 
 
-RateDefinition = re.compile("""^
+RATE_DEFINITION = re.compile(r"""^
                                \s*(?P<rate_from>([0-9]*[.])?[0-9]+)
                                \s*(?P<currency_from>[A-Z]{3,4})
                                \s*=
@@ -18,7 +19,7 @@ def fixed_exchange_rates(*definitions):
         return currency_from + "-" + currency_to
 
     def parse(definition):
-        match = RateDefinition.match(definition)
+        match = RATE_DEFINITION.match(definition)
         if not match:
             raise RuntimeError("Cannot parse definition: " + definition)
         return (
@@ -33,7 +34,15 @@ def fixed_exchange_rates(*definitions):
 
 
 def yahoo_exchange_rates():
-    url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22{source}{destination}%22)&env=store://datatables.org/alltableswithkeys"
+
+    def build_request(currency_from, currency_to):
+        select = 'select * from yahoo.finance.xchange where pair in ("{0}{1}")'.format(
+            currency_from.code,
+            currency_to.code)
+        return Request(
+            url="http://query.yahooapis.com/v1/public/yql?q=" +
+            quote(select) +
+            "&env=store://datatables.org/alltableswithkeys")
 
     def extract_result(result):
         return BeautifulSoup(result, 'xml').query.results.rate.Rate.text
@@ -42,9 +51,8 @@ def yahoo_exchange_rates():
         return float(text)
 
     def process(currency_from, currency_to):
-        req = urllib.request.Request(url=url.format(source=currency_from.code, destination=currency_to.code))
-        with urllib.request.urlopen(req) as f:
-            return parse_result(extract_result(f.read()))
+        with urlopen(build_request(currency_from, currency_to)) as content:
+            return parse_result(extract_result(content.read()))
 
     return process
 
@@ -59,9 +67,9 @@ def google_exchange_rates():
         return float(text.strip().split(" ")[0])
 
     def process(currency_from, currency_to):
-        req = urllib.request.Request(url=url.format(source=currency_from.code, destination=currency_to.code))
-        with urllib.request.urlopen(req) as f:
-            return parse_result(extract_result(f.read()))
+        req = Request(url=url.format(source=currency_from.code, destination=currency_to.code))
+        with urlopen(req) as content:
+            return parse_result(extract_result(content.read()))
 
     return process
 
