@@ -12,7 +12,7 @@ def test_empty_wallet_should_have_amount_of_0():
 
 @given(lists(integers(min_value=1, max_value=100000).map(EUR)))
 def test_wallet_should_sum_items_with_same_currency(amounts):
-    assume(len(amounts) > 10)
+    assume(len(amounts) > 1)
     assert amount_in_euro(Wallet(*amounts)) == sum(amounts, EUR(0))
 
 
