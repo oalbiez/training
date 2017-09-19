@@ -2,19 +2,32 @@ import random
 import pytest
 
 from exchange_rates import fixed_exchange_rates
-from currency import EUR, USD
+from currency import EUR, USD, XBT
 
 
 def any_amount():
     return random.randint(1, 10000)
 
 
-def test_eur_should_have_2_digit_precision():
-    assert EUR.round_amount(1.234) == 1.23
+def test_precision_should_round_to_nearest_value():
+    assert EUR.amount(1.234) == EUR(1.23)
+    assert EUR.amount(1.235) == EUR(1.24)
+    assert EUR.amount(1.236) == EUR(1.24)
 
 
-def test_usd_should_have_3_digit_precision():
-    assert USD.round_amount(1.2347) == 1.235
+def test_eur_should_have_2_digits_precision():
+    assert EUR.amount(0.01) == EUR(0.01)
+    assert EUR.amount(0.001) == EUR(0)
+
+
+def test_usd_should_have_3_digits_precision():
+    assert USD.amount(0.001) == USD(0.001)
+    assert USD.amount(0.0001) == USD(0)
+
+
+def test_xbt_should_have_8_digits_precision():
+    assert XBT.amount(0.00000001) == XBT(0.00000001)
+    assert XBT.amount(0.000000001) == XBT(0)
 
 
 def test_money_should_be_addable_when_same_currency():

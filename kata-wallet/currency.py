@@ -4,14 +4,14 @@ from functools import total_ordering
 
 class Currency(namedtuple('Currency', 'code precision')):
 
-    def round_amount(self, amount):
-        return round(amount, self.precision)
+    def amount(self, amount):
+        return Amount(round(amount, self.precision), self)
 
     def render(self, amount):
         return self.code + " " + str(amount)
 
     def __call__(self, amount):
-        return Amount(self.round_amount(amount), self)
+        return self.amount(amount)
 
 
 DZD = Currency("DZD", 2)
