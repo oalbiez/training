@@ -8,10 +8,6 @@ from exchange_rates import fixed_exchange_rates
 from currency import EUR, USD, XBT
 
 
-def any_amount():
-    return random.randint(1, 10000)
-
-
 def test_precision_should_round_to_nearest_value():
     assert EUR.amount(1.234) == EUR(1.23)
     assert EUR.amount(1.235) == EUR(1.24)
