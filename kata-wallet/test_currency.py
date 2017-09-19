@@ -1,6 +1,9 @@
 import random
 import pytest
 
+from hypothesis import given
+from hypothesis.strategies import integers
+
 from exchange_rates import fixed_exchange_rates
 from currency import EUR, USD, XBT
 
@@ -30,38 +33,25 @@ def test_xbt_should_have_8_digits_precision():
     assert XBT.amount(0.000000001) == XBT(0)
 
 
-@pytest.mark.parametrize("x,y", [
-    (any_amount(), any_amount()),
-    (any_amount(), any_amount()),
-])
+@given(integers(), integers())
 def test_money_should_be_addable_when_same_currency(x, y):
     assert EUR(x) + EUR(y) == EUR(x + y)
 
 
-@pytest.mark.parametrize("element", [
-    EUR(any_amount()),
-    EUR(any_amount()),
-])
-def test_money_should_have_a_neutral_element_for_add(element):
-    neutral = EUR(0)
-    assert neutral + element == element + neutral == element
+@given(integers())
+def test_money_should_have_a_neutral_element_for_add(amount):
+    assert EUR(0) + EUR(amount) == EUR(amount) + EUR(0) == EUR(amount)
 
 
-@pytest.mark.parametrize("x,y,z", [
-    (EUR(any_amount()), EUR(any_amount()), EUR(any_amount())),
-    (EUR(any_amount()), EUR(any_amount()), EUR(any_amount())),
-])
+@given(integers().map(EUR), integers().map(EUR), integers().map(EUR))
 def test_money_should_be_assosiative_for_add(x, y, z):
     assert (x + y) + z == x + (y + z) == x + y + z
 
 
-@pytest.mark.parametrize("eur,usd", [
-    (EUR(any_amount()), USD(any_amount())),
-    (EUR(any_amount()), USD(any_amount())),
-])
+@given(integers(), integers())
 def test_money_should_raise_error_when_currency_mismatch(eur, usd):
     with pytest.raises(TypeError) as exception:
-        _ = eur + usd
+        _ = EUR(eur) + USD(usd)
     assert str(exception.value) == 'Mismatch currency, expected EUR got USD'
 
 
