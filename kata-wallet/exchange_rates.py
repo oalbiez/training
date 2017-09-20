@@ -1,7 +1,7 @@
 import re
 import time
-from urllib.parse import quote
-from urllib.request import urlopen, Request
+from urllib.parse import urlencode
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 
@@ -33,16 +33,13 @@ def fixed_exchange_rates(*definitions):
     return rate
 
 
-def yahoo_exchange_rates():
+def get(url, params):
+    print (url + urlencode(params))
+    with urlopen(url + urlencode(params)) as reply:
+        return reply.read()
 
-    def build_request(currency_from, currency_to):
-        select = 'select * from yahoo.finance.xchange where pair in ("{0}{1}")'.format(
-            currency_from.code,
-            currency_to.code)
-        return Request(
-            url="http://query.yahooapis.com/v1/public/yql?q=" +
-            quote(select) +
-            "&env=store://datatables.org/alltableswithkeys")
+
+def yahoo_exchange_rates(getter=get):
 
     def extract_result(result):
         return BeautifulSoup(result, 'xml').query.results.rate.Rate.text
@@ -51,14 +48,16 @@ def yahoo_exchange_rates():
         return float(text)
 
     def process(currency_from, currency_to):
-        with urlopen(build_request(currency_from, currency_to)) as content:
-            return parse_result(extract_result(content.read()))
+        return parse_result(extract_result(getter(
+            "http://query.yahooapis.com/v1/public/yql?", {
+                'q': 'select * from yahoo.finance.xchange where pair in ("{0}{1}")'.format(currency_from.code, currency_to.code),
+                'env': 'store://datatables.org/alltableswithkeys'
+            })))
 
     return process
 
 
-def google_exchange_rates():
-    url = "https://finance.google.com/finance/converter?a=1&from={source}&to={destination}"
+def google_exchange_rates(getter=get):
 
     def extract_result(html):
         return BeautifulSoup(html, 'html.parser').find(id='currency_converter_result').span.text
@@ -67,11 +66,16 @@ def google_exchange_rates():
         return float(text.strip().split(" ")[0])
 
     def process(currency_from, currency_to):
-        req = Request(url=url.format(source=currency_from.code, destination=currency_to.code))
-        with urlopen(req) as content:
-            return parse_result(extract_result(content.read()))
+        return parse_result(extract_result(getter(
+            'https://finance.google.com/finance/converter?a=1&', {
+                'from': currency_from.code,
+                'to': currency_to.code})))
 
     return process
+
+
+
+
 
 
 def cached_exchange_rates(inner, duration, time_provider=time.time):
