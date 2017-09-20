@@ -34,7 +34,6 @@ def fixed_exchange_rates(*definitions):
 
 
 def get(url, params):
-    print (url + urlencode(params))
     with urlopen(url + urlencode(params)) as reply:
         return reply.read()
 
@@ -49,7 +48,7 @@ def yahoo_exchange_rates(getter=get):
 
     def process(currency_from, currency_to):
         return parse_result(extract_result(getter(
-            "http://query.yahooapis.com/v1/public/yql?", {
+            'http://query.yahooapis.com/v1/public/yql?', {
                 'q': 'select * from yahoo.finance.xchange where pair in ("{0}{1}")'.format(currency_from.code, currency_to.code),
                 'env': 'store://datatables.org/alltableswithkeys'
             })))
@@ -67,15 +66,12 @@ def google_exchange_rates(getter=get):
 
     def process(currency_from, currency_to):
         return parse_result(extract_result(getter(
-            'https://finance.google.com/finance/converter?a=1&', {
+            'https://finance.google.com/finance/converter?', {
+                'a': 1,
                 'from': currency_from.code,
                 'to': currency_to.code})))
 
     return process
-
-
-
-
 
 
 def cached_exchange_rates(inner, duration, time_provider=time.time):
