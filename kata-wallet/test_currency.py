@@ -7,6 +7,10 @@ from exchange_rates import fixed_exchange_rates
 from currency import EUR, USD, XBT
 
 
+def euros():
+    return integers(min_value=1, max_value=100000).map(EUR)
+
+
 def test_precision_should_round_to_nearest_value():
     assert EUR.amount(1.234) == EUR(1.23)
     assert EUR.amount(1.235) == EUR(1.24)
@@ -33,12 +37,12 @@ def test_money_should_be_addable_when_same_currency(x, y):
     assert EUR(x) + EUR(y) == EUR(x + y)
 
 
-@given(integers())
-def test_money_should_have_a_neutral_element_for_add(amount):
-    assert EUR(0) + EUR(amount) == EUR(amount) + EUR(0) == EUR(amount)
+@given(euros())
+def test_money_should_have_a_neutral_element_for_add(element):
+    assert EUR(0) + element == element + EUR(0) == element
 
 
-@given(integers().map(EUR), integers().map(EUR), integers().map(EUR))
+@given(euros(), euros(), euros())
 def test_money_should_be_assosiative_for_add(x, y, z):
     assert (x + y) + z == x + (y + z) == x + y + z
 
