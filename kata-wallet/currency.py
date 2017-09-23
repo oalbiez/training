@@ -52,7 +52,6 @@ class Amount(object):
         return self.__currency.render(self.__value)
 
 
-
 AED = Currency("AED", 2, "United Arab Emirates dirham")
 AFN = Currency("AFN", 2, "Afghan afghani")
 ALL = Currency("ALL", 2, "Albanian lek")

@@ -1,19 +1,20 @@
 from hypothesis import given, assume
-from hypothesis.strategies import integers, lists, builds
+from hypothesis.strategies import integers, lists
 
 from wallet import Wallet
 from currency import USD, EUR, DZD, KRW, XBT
 from exchange_rates import fixed_exchange_rates
 
 
-Euros = integers(min_value=1, max_value=100000).map(EUR)
+def euros():
+    return integers(min_value=1, max_value=100000).map(EUR)
 
 
 def test_empty_wallet_should_have_amount_of_0():
     assert amount_in_euro(Wallet()) == EUR(0)
 
 
-@given(lists(Euros))
+@given(lists(euros()))
 def test_wallet_should_sum_items_with_same_currency(amounts):
     assume(len(amounts) > 1)
     assert amount_in_euro(Wallet(*amounts)) == sum(amounts, EUR(0))

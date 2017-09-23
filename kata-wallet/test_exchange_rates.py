@@ -1,7 +1,7 @@
 from pytest import mark
 from exchange_rates import google_exchange_rates, yahoo_exchange_rates
 from wallet import Wallet
-from currency import USD, EUR, Currency
+from currency import USD, EUR
 
 
 @mark.slowtest
@@ -26,7 +26,11 @@ def test_google_exchange_with_valid_response():
       <title>
        Currency Converter - Google Finance
       </title>
-      <meta content="Get real-time stock quotes &amp; charts, financial news, currency conversions, or track your portfolio with Google Finance." name="Description">
+      <meta
+        content="
+            Get real-time stock quotes &amp; charts, financial news, currency conversions,
+            or track your portfolio with Google Finance."
+        name="Description">
        <link href="/finance/s/OVd9g2P4lGg/styles/finance_us.css" rel="stylesheet" type="text/css">
         <link href="/finance/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"/>
        </link>
@@ -84,7 +88,7 @@ def test_google_exchange_with_valid_response():
     </html>
     """
 
-    assert google_exchange_rates(getter=lambda x,y: reply)(EUR, USD) == 1.2
+    assert google_exchange_rates(getter=lambda x, y: reply)(EUR, USD) == 1.2
 
 
 @mark.skip
@@ -95,7 +99,11 @@ def test_google_exchange_with_invalid_response():
       <title>
        Currency Converter - Google Finance
       </title>
-      <meta content="Get real-time stock quotes &amp; charts, financial news, currency conversions, or track your portfolio with Google Finance." name="Description">
+      <meta
+        content="
+            Get real-time stock quotes &amp; charts, financial news, currency conversions,
+            or track your portfolio with Google Finance."
+        name="Description">
        <link href="/finance/s/OVd9g2P4lGg/styles/finance_us.css" rel="stylesheet" type="text/css">
         <link href="/finance/favicon.ico" rel="icon" type="image/vnd.microsoft.icon"/>
        </link>
@@ -149,4 +157,4 @@ def test_google_exchange_with_invalid_response():
     </html>
     """
 
-    assert google_exchange_rates(getter=lambda x,y: reply)(EUR, USD) == 1.2
+    assert google_exchange_rates(getter=lambda x, y: reply)(EUR, USD) == 1.2

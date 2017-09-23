@@ -47,9 +47,10 @@ def yahoo_exchange_rates(getter=get):
         return float(text)
 
     def process(currency_from, currency_to):
+        query = 'select * from yahoo.finance.xchange where pair in ("{0}{1}")'
         return parse_result(extract_result(getter(
             'http://query.yahooapis.com/v1/public/yql?', {
-                'q': 'select * from yahoo.finance.xchange where pair in ("{0}{1}")'.format(currency_from.code, currency_to.code),
+                'q': query.format(currency_from.code, currency_to.code),
                 'env': 'store://datatables.org/alltableswithkeys'
             })))
 
