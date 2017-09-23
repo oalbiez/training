@@ -12,7 +12,6 @@ def test_yahoo_exchange_rates_should_be_not_null():
 @mark.slowtest
 def test_google_exchange_rates_should_be_not_null():
     assert google_exchange_rates()(EUR, USD) > 0
-    assert google_exchange_rates()(Currency("xxx", 2), USD) > 0
 
 
 @mark.slowtest
