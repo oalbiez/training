@@ -4,29 +4,29 @@ from functools import total_ordering
 
 class Currency(namedtuple('Currency', 'code precision description')):
 
-    def amount(self, amount):
+    def stock(self, amount):
         return Stock(round(amount, self.precision), self)
 
     def render(self, amount):
         return self.code + " " + str(amount)
 
     def __call__(self, amount):
-        return self.amount(amount)
+        return self.stock(amount)
 
 
 @total_ordering
 class Stock(object):
 
     @property
-    def value(self):
-        return self.__value
+    def amount(self):
+        return self.__amount
 
     @property
     def currency(self):
         return self.__currency
 
-    def __init__(self, value, currency):
-        self.__value = value
+    def __init__(self, amount, currency):
+        self.__amount = amount
         self.__currency = currency
 
     def is_currency(self, currency):
@@ -35,21 +35,21 @@ class Stock(object):
     def change(self, new_currency, exchange_rates):
         if self.is_currency(new_currency):
             return self
-        return new_currency(self.__value * exchange_rates(self.__currency, new_currency))
+        return new_currency(self.__amount * exchange_rates(self.__currency, new_currency))
 
     def __eq__(self, other):
-        return self.__value == other.value and self.__currency == other.currency
+        return self.__amount == other.amount and self.__currency == other.currency
 
     def __lt__(self, other):
-        return self.__value < other.value and self.__currency == other.currency
+        return self.__amount < other.amount and self.__currency == other.currency
 
     def __add__(self, other):
         if self.is_currency(other.currency):
-            return self.__currency(self.__value + other.value)
+            return self.__currency(self.__amount + other.amount)
         raise TypeError("Mismatch currency, expected " + self.__currency.code + " got " + other.currency.code)
 
     def __repr__(self):
-        return self.__currency.render(self.__value)
+        return self.__currency.render(self.__amount)
 
 
 AED = Currency("AED", 2, "United Arab Emirates dirham")
