@@ -5,7 +5,7 @@ from functools import total_ordering
 class Currency(namedtuple('Currency', 'code precision description')):
 
     def amount(self, amount):
-        return Amount(round(amount, self.precision), self)
+        return Stock(round(amount, self.precision), self)
 
     def render(self, amount):
         return self.code + " " + str(amount)
@@ -15,7 +15,7 @@ class Currency(namedtuple('Currency', 'code precision description')):
 
 
 @total_ordering
-class Amount(object):
+class Stock(object):
 
     @property
     def value(self):
