@@ -1,5 +1,6 @@
 
 
+# pylint: disable = redefined-outer-name
 def rate(currency_from, currency_to, rate):
     return (currency_from, currency_to, rate)
 
@@ -11,6 +12,6 @@ def fixed_exchange_rates(*definitions):
 
     rates = dict((key(currency_from, currency_to), rate) for currency_from, currency_to, rate in definitions)
 
-    def rate(currency_from, currency_to):
+    def get(currency_from, currency_to):
         return rates[key(currency_from.code, currency_to.code)]
-    return rate
+    return get
