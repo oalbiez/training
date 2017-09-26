@@ -4,8 +4,8 @@ test:
 	pytest-3 -m "not slowtest"
 
 full-test:
-	pytest-3 
+	pytest-3
 
 lint:
 	pycodestyle .
-	pylint3 *.py
+	pylint3 wallet/*.py wallet/exchange_rates/*.py
