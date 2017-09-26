@@ -38,7 +38,6 @@ class Value(Result):
             return Value(functor(*args, **kwargs))
         return do
 
-
     @property
     def value(self):
         return self.__value
@@ -93,7 +92,6 @@ def get(url):
         return Error("Unable to get url {}".format(url), exception)
 
 
-
 def html_soup(text):
     return Value(BeautifulSoup(text, 'html.parser'))
 
@@ -122,7 +120,13 @@ def parse(text):
     return Value(first) if first else Error('unable to parse')
 
 
-google_parse = compose(html_soup, find_in_soup(id='currency_converter_result'), span, text, parse, Value.function(float))
+google_parse = compose(
+    html_soup,
+    find_in_soup(id='currency_converter_result'),
+    span,
+    text,
+    parse,
+    Value.function(float))
 
 
 def gf_parse(soup):
