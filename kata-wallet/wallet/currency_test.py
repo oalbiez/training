@@ -3,7 +3,7 @@ import pytest
 from hypothesis import given
 from hypothesis.strategies import integers
 
-from exchange_rates import fixed_exchange_rates, rate
+from exchange_rates.fixed import fixed_exchange_rates, rate
 from currency import EUR, USD, XBT
 
 

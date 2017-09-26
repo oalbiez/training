@@ -3,7 +3,7 @@ from hypothesis.strategies import integers, lists
 
 from wallet import Wallet
 from currency import USD, EUR, DZD, KRW, XBT
-from exchange_rates import fixed_exchange_rates, rate
+from exchange_rates.fixed import fixed_exchange_rates, rate
 
 
 def euros():

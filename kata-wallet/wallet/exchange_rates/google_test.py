@@ -1,22 +1,12 @@
 from pytest import mark
-from exchange_rates import google_exchange_rates, yahoo_exchange_rates, fixerio_exchange_rates
+from exchange_rates.google import google_exchange_rates
 from wallet import Wallet
 from currency import USD, EUR
 
 
 @mark.slowtest
-def test_yahoo_exchange_rates_should_be_not_null():
-    assert yahoo_exchange_rates()(EUR, USD) > 0
-
-
-@mark.slowtest
 def test_google_exchange_rates_should_be_not_null():
     assert google_exchange_rates()(EUR, USD) > 0
-
-
-@mark.slowtest
-def test_fixerio_exchange_rates_should_be_not_null():
-    assert fixerio_exchange_rates()(EUR, USD) > 0
 
 
 @mark.slowtest
