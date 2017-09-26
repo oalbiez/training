@@ -3,7 +3,7 @@ import pytest
 from hypothesis import given
 from hypothesis.strategies import integers
 
-from exchange_rates import fixed_exchange_rates
+from exchange_rates import fixed_exchange_rates, rate
 from currency import EUR, USD, XBT
 
 
@@ -55,4 +55,4 @@ def test_money_should_raise_error_when_currency_mismatch(eur, usd):
 
 
 def test_money_should_be_changed_with_an_exchange_rate():
-    assert EUR(10).change(USD, fixed_exchange_rates("1 EUR = 1.19 USD")) == USD(11.9)
+    assert EUR(10).change(USD, fixed_exchange_rates(rate('EUR', 'USD', 1.19))) == USD(11.9)

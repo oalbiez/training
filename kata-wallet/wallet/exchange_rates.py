@@ -6,12 +6,8 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 
-RATE_DEFINITION = re.compile(r"""^
-                               \s*(?P<rate_from>([0-9]*[.])?[0-9]+)
-                               \s*(?P<currency_from>[A-Z]{3,4})
-                               \s*=
-                               \s*(?P<rate_to>([0-9]*[.])?[0-9]+)
-                               \s*(?P<currency_to>[A-Z]{3,4})$""", re.VERBOSE)
+def rate(currency_from, currency_to, rate):
+    return (currency_from, currency_to, rate)
 
 
 def fixed_exchange_rates(*definitions):
@@ -19,15 +15,7 @@ def fixed_exchange_rates(*definitions):
     def key(currency_from, currency_to):
         return currency_from + "-" + currency_to
 
-    def parse(definition):
-        match = RATE_DEFINITION.match(definition)
-        if not match:
-            raise RuntimeError("Cannot parse definition: " + definition)
-        return (
-            key(match.group('currency_from'), match.group('currency_to')),
-            float(match.group('rate_to')) / float(match.group('rate_from')))
-
-    rates = dict(parse(definition) for definition in definitions)
+    rates = dict((key(currency_from, currency_to), rate) for currency_from, currency_to, rate in definitions)
 
     def rate(currency_from, currency_to):
         return rates[key(currency_from.code, currency_to.code)]
@@ -83,7 +71,7 @@ def fixerio_exchange_rates(getter=get):
 
         return parse(getter('http://api.fixer.io/latest?', {
             'base': currency_from.code,
-            'symbols': currency_to.code }))
+            'symbols': currency_to.code}))
     return process
 
 

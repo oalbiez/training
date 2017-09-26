@@ -3,7 +3,7 @@ from hypothesis.strategies import integers, lists
 
 from wallet import Wallet
 from currency import USD, EUR, DZD, KRW, XBT
-from exchange_rates import fixed_exchange_rates
+from exchange_rates import fixed_exchange_rates, rate
 
 
 def euros():
@@ -21,13 +21,16 @@ def test_wallet_should_sum_items_with_same_currency(amounts):
 
 
 def test_wallet_should_change_item_to_required_currency():
-    assert amount_in_euro(Wallet(USD(10)), fixed_exchange_rates("1 USD = 1.1 EUR")) == EUR(11)
+    assert amount_in_euro(Wallet(USD(10)), fixed_exchange_rates(rate('USD', 'EUR', 1.1))) == EUR(11)
 
 
 def test_conversion_of_multiple_currencies():
     assert amount_in_euro(
         Wallet(EUR(10), DZD(50), KRW(200), XBT(0.00002354)),
-        fixed_exchange_rates("1 DZD = 0.01 EUR", "1 KRW = 0.001 EUR", "1 XBT = 4000 EUR")) == EUR(10.79)
+        fixed_exchange_rates(
+            rate('DZD', 'EUR', 0.01),
+            rate('KRW', 'EUR', 0.001),
+            rate('XBT', 'EUR', 4000))) == EUR(10.79)
 
 
 def amount_in_euro(wallet, exchange_rates=None):
